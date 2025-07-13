@@ -68,6 +68,26 @@ No tinker, execute:
 app(App\Contracts\Services\ProductServiceInterface::class)->syncProducts();
 ```
 
+### ⚠️ Possível erro de permissão no storage
+
+Se ao acessar a aplicação aparecer um erro semelhante a:
+
+```
+The stream or file "/var/www/storage/logs/laravel.log" could not be opened in append mode: Failed to open stream: Permission denied
+```
+
+Execute os comandos abaixo dentro do container para corrigir as permissões:
+
+```bash
+docker-compose exec app bash
+chown -R www-data:www-data storage bootstrap/cache
+chmod -R 775 storage bootstrap/cache
+```
+
+Depois, recarregue a página.
+
+---
+
 ## 🌐 Acessando a Aplicação
 
 - **Frontend**: http://localhost:8000
@@ -185,71 +205,4 @@ docker-compose exec app php artisan test
 - `id` (Primary Key)
 - `order_id` (Foreign Key)
 - `product_id` (Foreign Key)
-- `quantity` (Quantidade)
-- `unit_price` (Preço unitário)
-- `total_price` (Preço total)
-
-## 🔐 Configuração da API Externa
-
-A aplicação se comunica com a API da Luvinco:
-- **URL**: https://luvinco.proxy.beeceptor.com
-- **Token**: wQ8ehU2x4gj93CH9lMTnelQO3GcFvLzyqn8Fj3WA0ffQy57I60
-
-### ⚠️ Comportamento da API Externa
-**Importante**: A API externa atualiza os preços dos produtos **apenas uma vez por dia à meia-noite**. Durante o restante do dia, as requisições retornarão o mesmo preço.
-
-### 🔄 Estratégia de Sincronização
-- **Sincronização principal**: Diariamente às 00:05 (5 minutos após meia-noite)
-- **Sincronização de backup**: Diariamente às 06:00 (caso a primeira falhe)
-- **Middleware inteligente**: Sincroniza apenas uma vez por dia quando necessário
-- **Sincronização manual**: Disponível via comando `php artisan products:sync`
-
-### Endpoints Utilizados
-- `GET /products` - Lista de produtos
-- `POST /orders` - Criação de pedidos
-
-## 🚀 Deploy
-
-### Opções de Deploy
-- **Vercel**: Para frontend
-- **Railway**: Para backend completo
-- **Render**: Para aplicação completa
-- **AWS**: Para infraestrutura escalável
-
-### Variáveis de Ambiente para Deploy
-```env
-APP_NAME="Vitrine de Produtos"
-APP_ENV=production
-APP_DEBUG=false
-APP_URL=https://seu-dominio.com
-
-DB_CONNECTION=mysql
-DB_HOST=seu-host
-DB_PORT=3306
-DB_DATABASE=vitrine_db
-DB_USERNAME=seu-usuario
-DB_PASSWORD=sua-senha
-
-LUVINCO_API_URL=https://luvinco.proxy.beeceptor.com
-LUVINCO_API_TOKEN=wQ8ehU2x4gj93CH9lMTnelQO3GcFvLzyqn8Fj3WA0ffQy57I60
-```
-
-## 🤝 Contribuição
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-## 📝 Licença
-
-Este projeto foi desenvolvido como parte do desafio técnico da Luvinco.
-
-## 👨‍💻 Autor
-
-Desenvolvido com ❤️ seguindo as melhores práticas de desenvolvimento.
-
----
-
-**Nota**: Esta aplicação foi desenvolvida especificamente para o desafio técnico da Luvinco, demonstrando habilidades em PHP, Laravel, Docker e princípios SOLID.
+- `
