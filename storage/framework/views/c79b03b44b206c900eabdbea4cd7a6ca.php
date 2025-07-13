@@ -27,38 +27,19 @@
 <body class="bg-gray-50 min-h-screen">
     <!-- Header -->
     <header class="gradient-bg text-white shadow-lg">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-4">
-                    <i class="fas fa-shopping-bag text-2xl"></i>
-                    <h1 class="text-2xl font-bold">Vitrine de Produtos</h1>
+        <div class="container mx-auto px-2 sm:px-4 py-3 sm:py-4">
+            <!-- Top bar: título à esquerda, navegação à direita -->
+            <div class="flex flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 sm:space-x-4 min-w-0">
+                    <i class="fas fa-shopping-bag text-lg sm:text-2xl"></i>
+                    <h1 class="text-base sm:text-2xl font-bold whitespace-nowrap truncate">Vitrine de Produtos</h1>
                 </div>
-                
-                <!-- Barra de Pesquisa -->
-                <div class="flex-1 max-w-md mx-8">
-                    <form action="<?php echo e(route('vitrine.index')); ?>" method="GET" class="relative">
-                        <div class="relative">
-                            <input type="text" 
-                                   name="search" 
-                                   value="<?php echo e(request('search')); ?>"
-                                   placeholder="Pesquisar produtos, marcas e muito mais..."
-                                   class="w-full px-4 py-2 pl-10 pr-10 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            </div>
-                            <button type="submit" 
-                                    class="absolute inset-y-0 right-0 px-3 flex items-center bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg transition-colors">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                
-                <nav class="flex items-center space-x-6">
-                    <a href="<?php echo e(route('vitrine.index')); ?>" class="hover:text-gray-200 transition-colors">
-                        <i class="fas fa-home mr-2"></i>Início
+                <nav class="flex items-center space-x-2 sm:space-x-6 whitespace-nowrap">
+                    <a href="<?php echo e(route('vitrine.index')); ?>" class="hover:text-gray-200 transition-colors text-sm sm:text-base">
+                        <i class="fas fa-home mr-1 sm:mr-2"></i>Início
                     </a>
-                    <a href="<?php echo e(route('vitrine.checkout')); ?>" class="hover:text-gray-200 transition-colors relative">
-                        <i class="fas fa-shopping-cart mr-2"></i>Carrinho
+                    <a href="<?php echo e(route('vitrine.checkout')); ?>" class="hover:text-gray-200 transition-colors relative text-sm sm:text-base">
+                        <i class="fas fa-shopping-cart mr-1 sm:mr-2"></i>Carrinho
                         <?php
                             $cartItems = session('cart', []);
                             $totalItems = array_sum($cartItems);
@@ -71,6 +52,24 @@
                         <?php endif; ?>
                     </a>
                 </nav>
+            </div>
+            <!-- Barra de Pesquisa: abaixo no mobile, inline no desktop -->
+            <div class="w-full sm:flex-1 sm:max-w-md sm:mx-8 mt-2 sm:mt-0">
+                <form action="<?php echo e(route('vitrine.index')); ?>" method="GET" class="relative">
+                    <div class="relative">
+                        <input type="text" 
+                               name="search" 
+                               value="<?php echo e(request('search')); ?>"
+                               placeholder="Pesquisar produtos, marcas e muito mais..."
+                               class="w-full px-3 sm:px-4 py-2 pl-10 pr-10 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm text-sm sm:text-base">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        </div>
+                        <button type="submit" 
+                                class="absolute inset-y-0 right-0 px-2 sm:px-3 flex items-center bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg transition-colors">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </header>
