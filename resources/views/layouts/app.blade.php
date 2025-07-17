@@ -27,7 +27,7 @@
 <body class="bg-gray-50 min-h-screen">
     <!-- Header -->
     <header class="gradient-bg text-white shadow-lg">
-        <div class="container mx-auto px-2 sm:px-4 sm:py-4">
+        <div class="container mx-auto px-2 sm:px-4 pt-0 pb-4 sm:pt-4 sm:pb-4">
             <!-- Desktop Layout -->
             <div class="hidden sm:flex justify-between items-center">
                 <div class="flex items-center space-x-4">
@@ -96,19 +96,19 @@
                     </nav>
                 </div>
                 <!-- Barra de Pesquisa Mobile -->
-                <div class="w-full mt-2">
-                    <div class="max-w-xs mx-auto">
+                <div class="w-full mt-4">
+                    <div class="max-w-xs mx-auto -mt-4">
                         <form action="{{ route('vitrine.index') }}" method="GET" class="relative">
                             <div class="relative">
                                 <input type="text" 
                                        name="search" 
                                        value="{{ request('search') }}"
                                        placeholder="Pesquisar produtos, marcas e muito mais..."
-                                       class="w-full px-3 sm:px-4 py-2 pl-10 pr-10 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm text-sm sm:text-base">
+                                       class="w-full px-3 py-1 pl-10 pr-10 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm text-sm">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 </div>
                                 <button type="submit" 
-                                        class="absolute inset-y-0 right-0 px-2 sm:px-3 flex items-center bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg transition-colors">
+                                        class="absolute inset-y-0 right-0 px-2 flex items-center bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg transition-colors">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
