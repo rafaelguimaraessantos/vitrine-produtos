@@ -27,14 +27,34 @@
 <body class="bg-gray-50 min-h-screen">
     <!-- Header -->
     <header class="gradient-bg text-white shadow-lg">
-        <div class="container mx-auto px-2 sm:px-4 py-3 sm:py-4">
-            <!-- Top bar: título à esquerda, navegação à direita -->
-            <div class="flex flex-row justify-between items-center">
-                <div class="flex items-center space-x-2 sm:space-x-4 min-w-0">
-                    <i class="fas fa-shopping-bag text-lg sm:text-2xl"></i>
-                    <h1 class="text-base sm:text-2xl font-bold whitespace-nowrap truncate">Vitrine de Produtos</h1>
+        <div class="container mx-auto px-2 sm:px-4 sm:py-4">
+            <!-- Desktop Layout -->
+            <div class="hidden sm:flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-shopping-bag text-2xl"></i>
+                    <h1 class="text-2xl font-bold">Vitrine de Produtos</h1>
                 </div>
-                <nav class="flex items-center space-x-2 sm:space-x-6 whitespace-nowrap">
+                
+                <!-- Barra de Pesquisa Desktop -->
+                <div class="flex-1 max-w-lg">
+                    <form action="{{ route('vitrine.index') }}" method="GET" class="relative">
+                        <div class="relative">
+                            <input type="text" 
+                                   name="search" 
+                                   value="{{ request('search') }}"
+                                   placeholder="Pesquisar produtos, marcas e muito mais..."
+                                   class="w-full px-4 py-2 pl-10 pr-10 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            </div>
+                            <button type="submit" 
+                                    class="absolute inset-y-0 right-0 px-2 sm:px-3 flex items-center bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg transition-colors">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <nav class="flex items-center space-x-6">
                     <a href="{{ route('vitrine.index') }}" class="hover:text-gray-200 transition-colors text-sm sm:text-base">
                         <i class="fas fa-home mr-1 sm:mr-2"></i>Início
                     </a>
@@ -52,23 +72,49 @@
                     </a>
                 </nav>
             </div>
-            <!-- Barra de Pesquisa: abaixo no mobile, inline no desktop -->
-            <div class="w-full sm:flex-1 sm:max-w-md sm:mx-8 mt-2 sm:mt-0">
-                <form action="{{ route('vitrine.index') }}" method="GET" class="relative">
-                    <div class="relative">
-                        <input type="text" 
-                               name="search" 
-                               value="{{ request('search') }}"
-                               placeholder="Pesquisar produtos, marcas e muito mais..."
-                               class="w-full px-3 sm:px-4 py-2 pl-10 pr-10 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm text-sm sm:text-base">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        </div>
-                        <button type="submit" 
-                                class="absolute inset-y-0 right-0 px-2 sm:px-3 flex items-center bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg transition-colors">
-                            <i class="fas fa-search"></i>
-                        </button>
+
+            <!-- Mobile Layout -->
+            <div class="sm:hidden">
+                <!-- Top bar: título à esquerda, navegação à direita -->
+                <div class="flex flex-row justify-between items-center">
+                    <div class="flex items-center space-x-2 min-w-0">
+                        <i class="fas fa-shopping-bag text-lg sm:text-2xl"></i>
+                        <h1 class="text-base sm:text-2xl font-bold whitespace-nowrap truncate">Vitrine de Produtos</h1>
                     </div>
-                </form>
+                    <nav class="flex items-center space-x-2 sm:space-x-6 whitespace-nowrap">
+                        <a href="{{ route('vitrine.index') }}" class="hover:text-gray-200 transition-colors text-sm sm:text-base">
+                            <i class="fas fa-home mr-1 sm:mr-2"></i>Início
+                        </a>
+                        <a href="{{ route('vitrine.checkout') }}" class="hover:text-gray-200 transition-colors relative text-sm sm:text-base">
+                            <i class="fas fa-shopping-cart mr-1 sm:mr-2"></i>Carrinho
+                            @if($totalItems > 0)
+                                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                                    {{ $totalItems }}
+                                </span>
+                            @endif
+                        </a>
+                    </nav>
+                </div>
+                <!-- Barra de Pesquisa Mobile -->
+                <div class="w-full mt-2">
+                    <div class="max-w-xs mx-auto">
+                        <form action="{{ route('vitrine.index') }}" method="GET" class="relative">
+                            <div class="relative">
+                                <input type="text" 
+                                       name="search" 
+                                       value="{{ request('search') }}"
+                                       placeholder="Pesquisar produtos, marcas e muito mais..."
+                                       class="w-full px-3 sm:px-4 py-2 pl-10 pr-10 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm text-sm sm:text-base">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                </div>
+                                <button type="submit" 
+                                        class="absolute inset-y-0 right-0 px-2 sm:px-3 flex items-center bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg transition-colors">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
