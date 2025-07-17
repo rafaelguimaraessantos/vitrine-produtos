@@ -104,7 +104,7 @@
                                        name="search" 
                                        value="{{ request('search') }}"
                                        placeholder="Pesquisar produtos, marcas e muito mais..."
-                                       class="w-full px-3 py-1 pl-10 pr-10 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm text-sm">
+                                       class="w-full px-3 py-1 pl-4 sm:pl-10 pr-10 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm text-sm">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 </div>
                                 <button type="submit" 
